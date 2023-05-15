@@ -1,0 +1,71 @@
+1.Soru:Kodun ne işe yaradığını ve nasıl çalıştığını açıklayın.
+
+Bu C programı, belirli işlevlere sahip bir dizi işlemleri gerçekleştirir. İşlevlerin her biri belirli bir amaca hizmet etmektedir. İşlevler ve çalışma mantığı şu şekildedir:
+
+generate işlevi, "a" adında bir diziyi belirli bir boyutta rastgele sayılarla doldurur. Bu rastgele sayılar, MAX_W sabitiyle sınırlanır.
+
+function1 işlevi, "a" dizisini sıralar. İç içe geçmiş döngüler kullanarak, dizi elemanlarını küçükten büyüğe doğru sıralar.
+
+function2 işlevi, "a" dizisindeki alt dizilerin toplamlarını hesaplar ve ardından bu toplamların ortalamasını döndürür. İşlev, "current_sum" adında bir değişken kullanarak alt dizi toplamlarını takip eder. Eğer bir elemanın eklenmesi sonucunda "current_sum" 0'dan büyük olursa, elemanı ekler. Aksi halde "current_sum" sıfırlanır. İşlev, "t" adında bir değişken kullanarak en büyük alt dizi toplamını tutar ve bu değeri geri döndürür.
+
+function3 işlevi, "g" adında bir matrisi alır ve "d" adında başka bir matris oluşturur. Bu işlev, iki düğüm arasındaki en kısa yolu bulmak için Floyd-Warshall algoritmasını kullanır. İlk olarak, "g" matrisinin elemanları "d" matrisine kopyalanır. Ardından, "d" matrisi üzerinde Floyd-Warshall algoritması uygulanarak en kısa yollar hesaplanır.
+
+print1 işlevi, "a" dizisini ekrana yazdırır. Her bir dizi elemanı bir boşlukla ayrılır ve her 10 elemandan sonra bir satır atlanır.
+
+print2 işlevi, "g" matrisini ekrana yazdırır. Her bir matris elemanı üç haneyle yazdırılır ve aralarına bir boşluk konulur. Eğer eleman "INF" (sonsuz) ise, "INF" yazdırılır.
+
+print3 işlevi, "d" matrisini ekrana yazdırır. İki düğüm arasındaki en kısa yolları ve bu yolların maliyetlerini gösterir. Eğer maliyet, "t" parametresinden küçükse, yolu ve maliyeti ekrana yazdırır.
+
+Programın main işlevinde, önceden tanımlanmış bir "a" dizisi ve "g" matrisi kullanılarak işlevler sırasıyla çağrılır.
+
+2.Soru:Kodun zaman karmaşıklığınıadım adım göstererek hesaplayın.
+
+1.generate fonksiyonu, A dizisine rastgele sayılar atar. Bu işlem O(A_SIZE) zamanda gerçekleşir.
+2.function1 fonksiyonu, A dizisini sıralar. İki döngü kullanarak bubble sort algoritması uygulanır. Bu işlem O(A_SIZE^2) zamanda gerçekleşir.
+3.function2 fonksiyonu, A dizisindeki en büyük toplam alt dizinin ortalamasını hesaplar. Bir döngü kullanılarak dizi taranır ve her bir eleman için toplam hesaplanır. Bu işlem O(A_SIZE) zamanda gerçekleşir.
+4.function3 fonksiyonu, g matrisini kullanarak d matrisini oluşturur. İki tane iç içe geçmiş döngü kullanılarak matris elemanlarına değerler atanır. Bu işlem O(G_SIZE^2) zamanda gerçekleşir.
+5.function3 fonksiyonunun ikinci kısmı, Floyd-Warshall algoritması kullanarak d matrisinin tüm elemanlarını günceller. Üç tane iç içe geçmiş döngü kullanılarak tüm elemanlar taranır. Bu işlem O(G_SIZE^3) zamanda gerçekleşir.
+6.print1 fonksiyonu, A dizisini ekrana yazdırır. Bir döngü kullanılarak dizinin tüm elemanları yazdırılır. Bu işlem O(A_SIZE) zamanda gerçekleşir.
+7.print2 fonksiyonu, g matrisini ekrana yazdırır. İki tane iç içe geçmiş döngü kullanılarak matrisin tüm elemanları yazdırılır. Bu işlem O(G_SIZE^2) zamanda gerçekleşir.
+8.print3 fonksiyonu, d matrisindeki belirli bir değerden küçük olan elemanları ekrana yazdırır. İki tane iç içe geçmiş döngü kullanılarak matrisin tüm elemanları taranır ve istenen koşulu sağlayanlar yazdırılır. Bu işlem O(G_SIZE^2) zamanda gerçekleşir.
+Toplam zaman karmaşıklığı:
+O(A_SIZE) + O(A_SIZE^2) + O(A_SIZE) + O(G_SIZE^2) + O(G_SIZE^3) + O(A_SIZE) + O(G_SIZE^2) + O(G_SIZE^2)
+Bu ifadeyi daha sade bir şekilde ifade etmek için en yüksek dereceli terimi alırız:
+O(G_SIZE^3)
+Sonuç olarak, kodun zaman karmaşıklığı O(G_SIZE^3) olarak hesaplanır.
+
+3.Soru:Verilen kodun nasıl geliştirilebileceğiöneriler vererek anlatın.
+
+1.Algoritma karmaşıklığını iyileştirmek için "function1" ve "function2" fonksiyonlarındaki sıralama işlemi için daha etkili bir sıralama algoritması kullanılabilir. Örneğin, hızlı sıralama (quick sort) veya birleştirme sıralaması (merge sort) gibi daha hızlı sıralama algoritmaları tercih edilebilir.
+2."function2" fonksiyonunda, "count" değişkeni kullanılarak ortalama t değeri hesaplanıyor. Ancak bu işlem yanlış sonuçlar verebilir, çünkü "count" değişkeni sadece ardışık pozitif toplamların sayısını tutuyor. Bu nedenle, "function2" fonksiyonunun doğru sonuç üretmesi için algoritma yeniden gözden geçirilmeli veya daha açık bir şekilde belirtilmelidir.
+3."function3" fonksiyonunda, Floyd-Warshall algoritmasını kullanarak tüm çiftler arası en kısa yolu hesaplamak yerine, daha verimli bir algoritma olan Dijkstra veya Bellman-Ford algoritması kullanılabilir. Bu, daha düşük bir karmaşıklıkla aynı sonuçları elde etmenizi sağlar.
+4.Kodda tanımlanan "MAX_W" sabiti, başka bir amaç için kullanılmıyor gibi görünüyor. Eğer gereksizse, bunu kaldırabilirsiniz.
+5.Kodun okunabilirliğini artırmak için, değişken ve fonksiyon adları daha açıklayıcı olabilir. Örneğin, "a", "g" ve "d" gibi değişken adları yerine "array", "graph" ve "distances" gibi adlar kullanabilirsiniz. Benzer şekilde, fonksiyon adları daha anlaşılır olabilir.
+6.Kodda gereksiz boşluklar ve girintiler var. Bu boşlukları ve girintileri düzenleyerek kodun okunabilirliğini artırabilirsiniz.
+7.Kodun başında standart kütüphanelerin tanımlandığı bölümde bazı kütüphaneler kullanılmıyor gibi görünüyor. Kullanılmayan kütüphaneleri kaldırarak gereksiz kod karmaşasını azaltabilirsiniz.
+8.Kodun yorum satırları eklenerek, her bir fonksiyonun veya bölümün ne yaptığı hakkında daha fazla açıklama yapabilirsiniz. Bu, kodu daha kolay anlamanıza ve geliştirmenize yardımcı olacaktır.
+Bu öneriler, verilen kodu daha verimli, okunabilir ve sürdürülebilir hale getirmenizi sağlayacaktır. 
+
+SORU 5:Heriki kodun zaman karmaşıklıklarını ve çalışma sürelerini karşılaştırın.
+
+function1: Bu fonksiyon bir sıralama algoritması kullanarak verilen diziyi sıralıyor. Sıralama algoritmasının karmaşıklığı O(n^2) olduğundan, bu fonksiyonun karmaşıklığı da O(n^2) olacaktır.
+
+function2: Bu fonksiyon verilen dizinin elemanlarının toplamını hesaplayarak ortalamayı buluyor. Toplamı hesaplama işlemi O(n) karmaşıklığına sahiptir, bu yüzden bu fonksiyonun karmaşıklığı da O(n) olacaktır.
+
+function3: Bu fonksiyon, verilen bir graf matrisi üzerinde Floyd-Warshall algoritmasını kullanarak en kısa mesafeleri hesaplıyor. Floyd-Warshall algoritmasının karmaşıklığı O(n^3) olduğundan, bu fonksiyonun karmaşıklığı da O(n^3) olacaktır.
+
+Dolayısıyla, C dilindeki kodun karmaşıklığı şu şekildedir:
+
+Toplam karmaşıklık: O(n^3) + O(n^2) + O(n^2) = O(n^3)
+Şimdi, Python dilindeki kodun karmaşıklığını analiz edelim:
+
+function1: Bu fonksiyon, hızlı sıralama algoritmasını kullanarak verilen diziyi sıralıyor. Hızlı sıralama algoritmasının ortalama karmaşıklığı O(n log n) olduğundan, bu fonksiyonun karmaşıklığı da O(n log n) olacaktır.
+
+function2: Bu fonksiyon verilen dizinin elemanlarının toplamını hesaplayarak ortalamayı buluyor. Toplamı hesaplama işlemi O(n) karmaşıklığına sahiptir, bu yüzden bu fonksiyonun karmaşıklığı da O(n) olacaktır.
+
+function3: Bu fonksiyon, verilen bir graf matrisi üzerinde Floyd-Warshall algoritmasını kullanarak en kısa mesafeleri hesaplıyor. Floyd-Warshall algoritmasının karmaşıklığı O(n^3) olduğundan, bu fonksiyonun karmaşıklığı da O(n^3) olacaktır.
+
+Dolayısıyla, Python dilindeki kodun karmaşıklığı şu şekildedir:
+
+Toplam karmaşıklık: O(n log n) + O(n) + O(n^3) = O(n^3)
+İki dil arasındaki karmaşıklık karşılaştırmasında, genellikle Floyd-Warshall algoritması tarafından kullanılan döngülerin karmaşıklığı ağırlık kazanır. Bu durumda, C dilindeki kodun karmaşıklığı Python dilindeki kodunkinden biraz daha iyi olur. Ancak, bu fark genellikle küçüktür ve pratikte ihmal edilebilir.
